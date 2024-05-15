@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useMemo, useState } from 'react';
 
 //MRT Imports
@@ -10,16 +11,9 @@ import {
 
 //Material UI Imports
 import {
-  Box,
-  Button,
-  ListItemIcon,
-  MenuItem,
-  Typography,
-  lighten,
+  Box, Typography, lighten,
 } from '@mui/material';
 
-//Icons Imports
-import { AccountCircle, Send } from '@mui/icons-material';
 
 
 
@@ -52,7 +46,7 @@ const Example = () => {
             id: 'name', //id is still required when using accessorFn instead of accessorKey
             header: 'Name',
             size: 250,
-            Cell: ({ renderedCellValue, row }) => (
+            Cell: ({ renderedCellValue }) => (
               <Box
                 sx={{
                   display: 'flex',
@@ -60,13 +54,6 @@ const Example = () => {
                   gap: '1rem',
                 }}
               >
-                {/* <img
-                  alt="avatar"
-                  height={30}
-                  src={row.original.avatar}
-                  loading="lazy"
-                  style={{ borderRadius: '50%' }}
-                /> */}
                 {/* using renderedCellValue instead of cell.getValue() preserves filter match highlighting */}
                 <span>{renderedCellValue}</span>
               </Box>
@@ -79,8 +66,8 @@ const Example = () => {
             header: 'Email',
             size: 300,
           },
-          
-          
+
+
         ],
       },
       {
@@ -94,7 +81,7 @@ const Example = () => {
             header: 'Salary',
             size: 200,
           },
-          
+
           {
             accessorKey: 'jobTitle', //hey a simple column for once
             header: 'Job Title',
@@ -151,31 +138,33 @@ const Example = () => {
       shape: 'rounded',
       variant: 'outlined',
     },
-    
-    
- 
+
+
+
     renderTopToolbar: ({ table }) => {
-      
+
 
       return (
         <Box
           sx={(theme) => ({
-            backgroundColor: lighten(theme.palette.background.default, 0.05),
+            backgroundColor: lighten(theme.palette.background.default, .5),
             display: 'flex',
-            gap: '0.5rem',
-            p: '8px',
+            gap: '1rem',
+            p: '20px',
             justifyContent: 'space-between',
           })}
         >
-          <Box sx={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+
+          <Box>
+            <Box sx={{ display: 'flex', gap: '1rem' }}>
+            <Typography variant="h6">Extension Table View</Typography>
+
+            </Box>
+          </Box>
+          <Box sx={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
             {/* import MRT sub-components */}
             <MRT_GlobalFilterTextField table={table} />
             <MRT_ToggleFiltersButton table={table} />
-          </Box>
-          <Box>
-            <Box sx={{ display: 'flex', gap: '0.5rem' }}>
-             <span></span>
-            </Box>
           </Box>
         </Box>
       );
